@@ -376,13 +376,14 @@ MonoBehaviour:
   textureWidth: 16
   textureHeight: 16
   pixelsPerUnit: 16
-  capeColor: {r: 0.53, g: 0.07, b: 0.21, a: 1}
+  capeColor: {r: 0.42299998, g: 0.056399994, b: 0.16920006, a: 1}
   suitColor: {r: 0.06, g: 0.09, b: 0.16, a: 1}
   collarColor: {r: 0.74, g: 0.07, b: 0.23, a: 1}
   skinColor: {r: 0.94, g: 0.96, b: 0.97, a: 1}
   eyeColor: {r: 0.93, g: 0.26, b: 0.26, a: 1}
-  waveSpeed: 8
-  waveAmount: 3
+  waveSpeed: 10
+  waveAmount: 1.5
+  dragStrength: 0.8
 --- !u!212 &1641999583
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -499,7 +500,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 2
 --- !u!61 &1641999587
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -534,7 +535,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -544,7 +545,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
