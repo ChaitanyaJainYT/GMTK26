@@ -373,9 +373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cc3060fcd221d4caaf168a22dcd949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureWidth: 8
-  textureHeight: 8
-  pixelsPerUnit: 8
+  textureWidth: 16
+  textureHeight: 16
+  pixelsPerUnit: 16
   capeColor: {r: 0.53, g: 0.07, b: 0.21, a: 1}
   suitColor: {r: 0.06, g: 0.09, b: 0.16, a: 1}
   collarColor: {r: 0.74, g: 0.07, b: 0.23, a: 1}
