@@ -36,15 +36,19 @@ public class PickupItem : MonoBehaviour
         {
             case ItemType.BloodChalice:
                 dracula.AddJump(1);
+                Debug.Log($"PickupItem [{name}]: BloodChalice collected — +1 jump");
                 break;
             case ItemType.Sunstone:
                 dracula.AddJump(-1);
+                Debug.Log($"PickupItem [{name}]: Sunstone collected — -1 jump");
                 break;
             case ItemType.BatSwarm:
                 dracula.MultiplyJumps(2);
+                Debug.Log($"PickupItem [{name}]: BatSwarm collected — jumps doubled");
                 break;
             case ItemType.GothicKey:
                 dracula.HasKey = true;
+                Debug.Log($"PickupItem [{name}]: GothicKey collected — hasKey = true");
                 break;
         }
     }

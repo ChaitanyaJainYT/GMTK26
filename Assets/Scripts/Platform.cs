@@ -8,6 +8,7 @@ public class Platform : MonoBehaviour
     [Header("Identity")]
     public PlatformType type = PlatformType.Standard;
     public int platformId;
+    public bool requiresKey = false;
 
     [Header("Crumble Settings")]
     [SerializeField] private float crumbleDelay = 0.8f;
@@ -38,6 +39,7 @@ public class Platform : MonoBehaviour
         DraculaController dracula = collision.gameObject.GetComponent<DraculaController>();
         if (dracula != null && dracula.RemainingJumps > 0)
         {
+            Debug.Log($"Platform [{platformId}]: Crumble triggered by Dracula");
             StartCoroutine(CrumbleRoutine());
         }
     }
@@ -61,6 +63,8 @@ public class Platform : MonoBehaviour
 
         transform.localPosition = originalPos;
         col.enabled = false;
+
+        Debug.Log($"Platform [{platformId}]: Crumble complete — collider disabled");
 
         if (crumbleParticles != null)
             crumbleParticles.Play();

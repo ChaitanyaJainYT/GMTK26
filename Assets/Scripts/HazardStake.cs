@@ -32,6 +32,7 @@ public class HazardStake : MonoBehaviour
         if (impactParticles != null)
             impactParticles.Play();
 
+        Debug.Log($"HazardStake [{name}]: Player staked — game over");
         OnPlayerStaked?.Invoke();
     }
 

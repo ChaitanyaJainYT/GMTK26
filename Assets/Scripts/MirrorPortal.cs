@@ -36,6 +36,8 @@ public class MirrorPortal : MonoBehaviour
         dracula.WarpTo(warpPos, platformObj);
         otherPortal.playerInside = true;
 
+        Debug.Log($"MirrorPortal: Teleported Dracula from {name} → {otherPortal.name}");
+
         if (warpSound != null && audioSource != null)
             audioSource.PlayOneShot(warpSound);
 

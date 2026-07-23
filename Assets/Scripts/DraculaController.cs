@@ -19,6 +19,8 @@ public class DraculaController : MonoBehaviour
     public GameObject CurrentPlatform { get => currentPlatform; set => currentPlatform = value; }
     public bool HasKey { get; set; }
 
+    public event System.Action<GameObject> OnLanded;
+
     private Rigidbody2D rb;
     private Collider2D col;
     private bool isGrounded;
@@ -42,6 +44,7 @@ public class DraculaController : MonoBehaviour
             launchedPlatform = currentPlatform;
             jumpedSinceLastLanding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            Debug.Log($"Dracula: Jump from {launchedPlatform?.name} (charges: {remainingJumps})");
         }
     }
 
@@ -58,24 +61,37 @@ public class DraculaController : MonoBehaviour
         isGrounded = hit != null;
         currentPlatform = hit ? hit.gameObject : null;
 
-        if (!wasGrounded && isGrounded && jumpedSinceLastLanding)
+        if (!wasGrounded && isGrounded)
         {
-            if (launchedPlatform != currentPlatform)
+            if (jumpedSinceLastLanding)
             {
-                remainingJumps = Mathf.Max(0, remainingJumps - 1);
+                bool diffPlatform = launchedPlatform != currentPlatform;
+                if (diffPlatform)
+                {
+                    remainingJumps = Mathf.Max(0, remainingJumps - 1);
+                    Debug.Log($"Dracula: Landed on {currentPlatform?.name} (was {launchedPlatform?.name}) — cost 1 jump, {remainingJumps} remaining");
+                }
+                else
+                {
+                    Debug.Log($"Dracula: Landed back on {currentPlatform?.name} — free landing");
+                }
+                jumpedSinceLastLanding = false;
             }
-            jumpedSinceLastLanding = false;
+
+            OnLanded?.Invoke(currentPlatform);
         }
     }
 
     public void AddJump(int amount)
     {
         remainingJumps = Mathf.Max(0, remainingJumps + amount);
+        Debug.Log($"Dracula: Jumps changed by {amount} → {remainingJumps}");
     }
 
     public void MultiplyJumps(int factor)
     {
         remainingJumps *= factor;
+        Debug.Log($"Dracula: Jumps multiplied by {factor} → {remainingJumps}");
     }
 
     public void WarpTo(Vector3 position, GameObject platform)
@@ -84,6 +100,7 @@ public class DraculaController : MonoBehaviour
         currentPlatform = platform;
         launchedPlatform = null;
         jumpedSinceLastLanding = false;
+        Debug.Log($"Dracula: Warped to {position}, platform set to {platform?.name}");
     }
 
     void OnDrawGizmosSelected()
