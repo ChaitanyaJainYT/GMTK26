@@ -124,6 +124,15 @@ public class ProceduralDracula2D : MonoBehaviour
         texture.Apply();
     }
 
+    public Texture2D GetTexture() => texture;
+
+    public byte[] EncodeCurrentFrameToPNG()
+    {
+        texture.SetPixels32(pixels);
+        texture.Apply();
+        return texture.EncodeToPNG();
+    }
+
     void SetPixel(int x, int y, Color color)
     {
         if (x >= 0 && x < textureWidth && y >= 0 && y < textureHeight)

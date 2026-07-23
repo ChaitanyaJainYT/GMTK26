@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public class Platform : MonoBehaviour
 {
+    private static int nextId = 1;
+
     public enum PlatformType { Standard, Start, Crumble, GoalCrypt }
 
     [Header("Identity")]
@@ -25,6 +27,8 @@ public class Platform : MonoBehaviour
 
     void Awake()
     {
+        if (platformId == 0)
+            platformId = nextId++;
         col = GetComponent<Collider2D>();
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null && crumbleSound != null)

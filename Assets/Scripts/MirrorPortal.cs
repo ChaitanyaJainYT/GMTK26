@@ -10,6 +10,8 @@ public class MirrorPortal : MonoBehaviour
     [SerializeField] private ParticleSystem warpParticles;
     [SerializeField] private AudioClip warpSound;
 
+    public event System.Action OnWarpped;
+
     private AudioSource audioSource;
     private bool playerInside;
 
@@ -35,6 +37,8 @@ public class MirrorPortal : MonoBehaviour
 
         dracula.WarpTo(warpPos, platformObj);
         otherPortal.playerInside = true;
+
+        OnWarpped?.Invoke();
 
         Debug.Log($"MirrorPortal: Teleported Dracula from {name} → {otherPortal.name}");
 

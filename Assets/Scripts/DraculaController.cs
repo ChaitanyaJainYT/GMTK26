@@ -20,6 +20,7 @@ public class DraculaController : MonoBehaviour
     public bool HasKey { get; set; }
 
     public event System.Action<GameObject> OnLanded;
+    public event System.Action OnJump;
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -45,6 +46,7 @@ public class DraculaController : MonoBehaviour
             jumpedSinceLastLanding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             Debug.Log($"Dracula: Jump from {launchedPlatform?.name} (charges: {remainingJumps})");
+            OnJump?.Invoke();
         }
     }
 

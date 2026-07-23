@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     public static event Action<int> OnJumpCountChanged;
     public static event Action OnLevelWin;
-    public static event Action OnLevelFailed;
+    public static event Action<string> OnLevelFailed;
 
     private DraculaController dracula;
 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
     {
         state = GameState.LevelFailed;
         Debug.Log($"GameManager: Level Failed — {reason}");
-        OnLevelFailed?.Invoke();
+        OnLevelFailed?.Invoke(reason);
     }
 
     public void ReloadLevel()
