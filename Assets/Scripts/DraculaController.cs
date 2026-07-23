@@ -103,6 +103,21 @@ public class DraculaController : MonoBehaviour
         Debug.Log($"Dracula: Warped to {position}, platform set to {platform?.name}");
     }
 
+    void LateUpdate()
+    {
+        if (!isGrounded || currentPlatform == null) return;
+
+        Collider2D platformCol = currentPlatform.GetComponent<Collider2D>();
+        if (platformCol == null) return;
+
+        Bounds platformBounds = platformCol.bounds;
+        float playerHalf = col.bounds.extents.x;
+
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, platformBounds.min.x + playerHalf, platformBounds.max.x - playerHalf);
+        transform.position = pos;
+    }
+
     void OnDrawGizmosSelected()
     {
         if (groundCheckPoint)
