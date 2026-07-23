@@ -16,6 +16,7 @@ public class DraculaController : MonoBehaviour
     [SerializeField] private int remainingJumps = 3;
 
     public int RemainingJumps => remainingJumps;
+    public GameObject CurrentPlatform { get => currentPlatform; set => currentPlatform = value; }
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -64,6 +65,14 @@ public class DraculaController : MonoBehaviour
             }
             jumpedSinceLastLanding = false;
         }
+    }
+
+    public void WarpTo(Vector3 position, GameObject platform)
+    {
+        rb.position = position;
+        currentPlatform = platform;
+        launchedPlatform = null;
+        jumpedSinceLastLanding = false;
     }
 
     void OnDrawGizmosSelected()
