@@ -6,7 +6,7 @@ public class ProceduralDracula2D : MonoBehaviour
     [Header("Sprite Canvas Dimensions")]
     public int textureWidth = 16;
     public int textureHeight = 16;
-    public float pixelsPerUnit = 16f; // Standard 16x16 pixel density
+    public float pixelsPerUnit = 16f;
 
     [Header("Colors")]
     public Color capeColor = new Color(0.53f, 0.07f, 0.21f);   // #881337 Crimson
@@ -16,8 +16,9 @@ public class ProceduralDracula2D : MonoBehaviour
     public Color eyeColor = new Color(0.93f, 0.26f, 0.26f);    // #ef4444 Glowing Red
 
     [Header("Animation Settings")]
-    public float waveSpeed = 8f;
-    public float waveAmount = 1.5f; // Scaled down for 16x16 grid
+    public float waveSpeed = 10f;
+    public float waveAmount = 1.2f;
+    public float dragStrength = 0.8f; // How strongly the cape trails behind velocity
 
     private Texture2D texture;
     private SpriteRenderer spriteRenderer;
@@ -29,12 +30,10 @@ public class ProceduralDracula2D : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
-        // 1. Create a blank dynamic texture (16x16)
         texture = new Texture2D(textureWidth, textureHeight, TextureFormat.RGBA32, false);
-        texture.filterMode = FilterMode.Point; // Pixel crispness
+        texture.filterMode = FilterMode.Point;
         pixels = new Color32[textureWidth * textureHeight];
 
-        // 2. Wrap into Unity Sprite (Pivot centered at feet)
         Sprite newSprite = Sprite.Create(
             texture,
             new Rect(0, 0, textureWidth, textureHeight),
@@ -51,19 +50,24 @@ public class ProceduralDracula2D : MonoBehaviour
 
     void DrawDraculaOnCanvas()
     {
-        // Clear background (Transparent)
+        // Clear background
         Color32 clearColor = new Color32(0, 0, 0, 0);
         for (int i = 0; i < pixels.Length; i++)
         {
             pixels[i] = clearColor;
         }
 
-        // Determine cape movement parameters
-        float vx = rb != null ? Mathf.Abs(rb.linearVelocity.x) : 0f;
-        float animationTime = Time.time * waveSpeed;
-        float currentWave = Mathf.Sin(animationTime) * waveAmount * (1f + vx * 0.2f);
+        // Get horizontal velocity
+        float vx = rb != null ? rb.linearVelocity.x : 0f;
 
-        // --- LAYER 1: Flowing Cape (Y: 1 to 10) ---
+        // 1. Calculate OPPOSE DRAG (Dracula moves Right [vx > 0] -> Cape trails Left [-offset])
+        float movementDrag = -vx * dragStrength;
+
+        // 2. Dynamic idle/movement wave
+        float animationTime = Time.time * waveSpeed;
+        float currentWave = Mathf.Sin(animationTime) * waveAmount;
+
+        // --- LAYER 1: Flowing Opposing Cape (Y: 1 to 10) ---
         int capeTopY = 10;
         int capeBottomY = 1;
         int baseLeftX = 4;
@@ -71,12 +75,17 @@ public class ProceduralDracula2D : MonoBehaviour
 
         for (int y = capeBottomY; y <= capeTopY; y++)
         {
+            // Progress goes from 0.0 (top anchored at shoulders) to 1.0 (bottom flowing free)
             float progress = 1f - ((float)(y - capeBottomY) / (capeTopY - capeBottomY));
-            int flare = Mathf.RoundToInt(progress * (2f + Mathf.Abs(currentWave) * 0.4f));
-            int waveX = Mathf.RoundToInt(currentWave * progress);
 
-            int startX = Mathf.Clamp(baseLeftX - flare + waveX, 0, textureWidth - 1);
-            int endX = Mathf.Clamp(baseRightX + flare + waveX, 0, textureWidth - 1);
+            // Flare outwards at bottom + wave oscillation
+            int flare = Mathf.RoundToInt(progress * (2f + Mathf.Abs(currentWave) * 0.3f));
+
+            // Shift cape OPPOSITE to movement direction (scaled by progress down the cape)
+            int totalShiftX = Mathf.RoundToInt((movementDrag + currentWave) * progress);
+
+            int startX = Mathf.Clamp(baseLeftX - flare + totalShiftX, 0, textureWidth - 1);
+            int endX = Mathf.Clamp(baseRightX + flare + totalShiftX, 0, textureWidth - 1);
 
             for (int x = startX; x <= endX; x++)
             {
@@ -94,11 +103,9 @@ public class ProceduralDracula2D : MonoBehaviour
         }
 
         // --- LAYER 3: High Gothic Collar (Y: 8 to 11) ---
-        // Left collar tips
         SetPixel(4, 11, collarColor); SetPixel(4, 10, collarColor);
         SetPixel(5, 9, collarColor); SetPixel(5, 8, collarColor);
 
-        // Right collar tips
         SetPixel(11, 11, collarColor); SetPixel(11, 10, collarColor);
         SetPixel(10, 9, collarColor); SetPixel(10, 8, collarColor);
 
@@ -111,19 +118,14 @@ public class ProceduralDracula2D : MonoBehaviour
             }
         }
 
-        // --- LAYER 5: Directional Glowing Red Eyes (Single Pixel each) ---
+        // --- LAYER 5: Directional Glowing Red Eyes ---
         int eyeXOffset = 0;
-        if (rb != null)
-        {
-            if (rb.linearVelocity.x < -0.1f) eyeXOffset = -1;
-            else if (rb.linearVelocity.x > 0.1f) eyeXOffset = 1;
-        }
+        if (vx < -0.1f) eyeXOffset = -1;
+        else if (vx > 0.1f) eyeXOffset = 1;
 
-        // Left Eye (X=6) and Right Eye (X=8), shifted by movement
         SetPixel(6 + eyeXOffset, 11, eyeColor);
         SetPixel(8 + eyeXOffset, 11, eyeColor);
 
-        // Apply array to Texture
         texture.SetPixels32(pixels);
         texture.Apply();
     }
