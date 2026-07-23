@@ -17,6 +17,7 @@ public class DraculaController : MonoBehaviour
 
     public int RemainingJumps => remainingJumps;
     public GameObject CurrentPlatform { get => currentPlatform; set => currentPlatform = value; }
+    public bool HasKey { get; set; }
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -65,6 +66,16 @@ public class DraculaController : MonoBehaviour
             }
             jumpedSinceLastLanding = false;
         }
+    }
+
+    public void AddJump(int amount)
+    {
+        remainingJumps = Mathf.Max(0, remainingJumps + amount);
+    }
+
+    public void MultiplyJumps(int factor)
+    {
+        remainingJumps *= factor;
     }
 
     public void WarpTo(Vector3 position, GameObject platform)
