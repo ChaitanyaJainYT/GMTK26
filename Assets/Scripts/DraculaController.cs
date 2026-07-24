@@ -110,7 +110,7 @@ public class DraculaController : MonoBehaviour
         if (!isGrounded || currentPlatform == null) return;
 
         Collider2D platformCol = currentPlatform.GetComponent<Collider2D>();
-        if (platformCol == null) return;
+        if (platformCol == null || !platformCol.enabled) return;
 
         Bounds platformBounds = platformCol.bounds;
         float playerHalf = col.bounds.extents.x;
