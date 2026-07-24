@@ -59,6 +59,9 @@ public class UIManager : MonoBehaviour
 
         if (keyIcon != null)
             keyIcon.enabled = dracula.HasKey;
+
+        if (Input.GetKeyDown(KeyCode.R))
+            GameManager.Instance?.ReloadLevel();
     }
 
     private void UpdateJumpDisplay(int count)
