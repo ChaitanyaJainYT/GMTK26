@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCanMove: 1
-  moveSpeed: 7
+  moveSpeed: 6
   jumpHeight: 5
   jumpDuration: 0.4
   downGravity: 2
