@@ -8,7 +8,7 @@ public class characterMovement : MonoBehaviour
 {
 
     [Header("Components")]
-    [SerializeField] movementLimiter moveLimit;
+    [SerializeField] bool characterCanMove = true;
     private Rigidbody2D body;
     characterGround ground;
 
@@ -24,7 +24,6 @@ public class characterMovement : MonoBehaviour
 
     [Header("Options")]
     [Tooltip("When false, the charcter will skip acceleration and deceleration and instantly move and stop")] public bool useAcceleration;
-    public bool itsTheIntro = true;
 
     [Header("Calculations")]
     public float directionX;
@@ -51,7 +50,7 @@ public class characterMovement : MonoBehaviour
         //This is called when you input a direction on a valid input type, such as arrow keys or analogue stick
         //The value will read -1 when pressing left, 0 when idle, and 1 when pressing right.
 
-        if (moveLimit.characterCanMove)
+        if (characterCanMove)
         {
             directionX = context.ReadValue<float>();
         }
@@ -60,7 +59,7 @@ public class characterMovement : MonoBehaviour
     private void Update()
     {
         //Used to stop movement when the character is playing her death animation
-        if (!moveLimit.characterCanMove && !itsTheIntro)
+        if (!characterCanMove)
         {
             directionX = 0;
         }
@@ -91,7 +90,7 @@ public class characterMovement : MonoBehaviour
         onGround = ground.GetOnGround();
 
         //Get the Rigidbody's current velocity
-        velocity = body.velocity;
+        velocity = body.linearVelocity;
 
         //Calculate movement, depending on whether "Instant Movement" has been checked
         if (useAcceleration)
@@ -142,7 +141,7 @@ public class characterMovement : MonoBehaviour
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
 
         //Update the Rigidbody with this new velocity
-        body.velocity = velocity;
+        body.linearVelocity = velocity;
 
     }
 
@@ -151,7 +150,7 @@ public class characterMovement : MonoBehaviour
         //If we're not using acceleration and deceleration, just send our desired velocity (direction * max speed) to the Rigidbody
         velocity.x = desiredVelocity.x;
 
-        body.velocity = velocity;
+        body.linearVelocity = velocity;
     }
 
 

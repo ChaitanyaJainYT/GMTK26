@@ -10,7 +10,7 @@ public class characterJump : MonoBehaviour
     private characterGround ground;
     [HideInInspector] public Vector2 velocity;
     private characterJuice juice;
-    [SerializeField] movementLimiter moveLimit;
+    [SerializeField] bool characterCanJump = true;
 
     [Header("Jumping Stats")]
     [SerializeField, Range(2f, 5.5f)][Tooltip("Maximum jump height")] public float jumpHeight = 7.3f;
@@ -62,7 +62,7 @@ public class characterJump : MonoBehaviour
     {
         //This function is called when one of the jump buttons (like space or the A button) is pressed.
 
-        if (moveLimit.characterCanMove)
+        if (characterCanJump)
         {
             //When we press the jump button, tell the script that we desire a jump.
             //Also, use the started and canceled contexts to know if we're currently holding the button
@@ -127,13 +127,13 @@ public class characterJump : MonoBehaviour
     private void FixedUpdate()
     {
         //Get velocity from Kit's Rigidbody 
-        velocity = body.velocity;
+        velocity = body.linearVelocity;
 
         //Keep trying to do a jump, for as long as desiredJump is true
         if (desiredJump)
         {
             DoAJump();
-            body.velocity = velocity;
+            body.linearVelocity = velocity;
 
             //Skip gravity calculations this frame, so currentlyJumping doesn't turn off
             //This makes sure you can't do the coyote time double jump bug
@@ -148,7 +148,7 @@ public class characterJump : MonoBehaviour
         //We change the character's gravity based on her Y direction
 
         //If Kit is going up...
-        if (body.velocity.y > 0.01f)
+        if (body.linearVelocity.y > 0.01f)
         {
             if (onGround)
             {
@@ -179,7 +179,7 @@ public class characterJump : MonoBehaviour
         }
 
         //Else if going down...
-        else if (body.velocity.y < -0.01f)
+        else if (body.linearVelocity.y < -0.01f)
         {
 
             if (onGround)
@@ -207,7 +207,7 @@ public class characterJump : MonoBehaviour
 
         //Set the character's Rigidbody's velocity
         //But clamp the Y variable within the bounds of the speed limit, for the terminal velocity assist option
-        body.velocity = new Vector3(velocity.x, Mathf.Clamp(velocity.y, -speedLimit, 100));
+        body.linearVelocity = new Vector3(velocity.x, Mathf.Clamp(velocity.y, -speedLimit, 100));
     }
 
     private void DoAJump()
@@ -234,7 +234,7 @@ public class characterJump : MonoBehaviour
             }
             else if (velocity.y < 0f)
             {
-                jumpSpeed += Mathf.Abs(body.velocity.y);
+                jumpSpeed += Mathf.Abs(body.linearVelocity.y);
             }
 
             //Apply the new jumpSpeed to the velocity. It will be sent to the Rigidbody in FixedUpdate;

@@ -5,7 +5,11 @@ public class DraculaController : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 12f;
+
+    [Header("Jump")]
+    [SerializeField] private float jumpHeight = 4f;
+    [SerializeField] private float jumpDuration = 0.4f;
+    [SerializeField][Range(1f, 5f)] private float downGravity = 2.5f;
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask platformLayer;
@@ -24,7 +28,10 @@ public class DraculaController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Collider2D col;
+    private float jumpVelocity;
+    private float upGravity;
     private bool isGrounded;
+    private bool jumpHeld;
     private GameObject currentPlatform;
     private GameObject launchedPlatform;
     private bool jumpedSinceLastLanding;
@@ -33,6 +40,20 @@ public class DraculaController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        RecomputeJumpParams();
+    }
+
+    void OnValidate()
+    {
+        RecomputeJumpParams();
+    }
+
+    private void RecomputeJumpParams()
+    {
+        jumpDuration = Mathf.Max(jumpDuration, 0.01f);
+        jumpHeight = Mathf.Max(jumpHeight, 0.01f);
+        jumpVelocity = 2f * jumpHeight / jumpDuration;
+        upGravity = 2f * jumpHeight / (jumpDuration * jumpDuration);
     }
 
     void Update()
@@ -40,11 +61,14 @@ public class DraculaController : MonoBehaviour
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
-        if (Input.GetButtonDown("Jump") && isGrounded && remainingJumps > 0)
+        jumpHeld = Input.GetButton("Jump") || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+
+        if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            && isGrounded && remainingJumps > 0)
         {
             launchedPlatform = currentPlatform;
             jumpedSinceLastLanding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
             Debug.Log($"Dracula: Jump from {launchedPlatform?.name} (charges: {remainingJumps})");
             OnJump?.Invoke();
         }
@@ -63,6 +87,12 @@ public class DraculaController : MonoBehaviour
         isGrounded = hit != null;
         currentPlatform = hit ? hit.gameObject : null;
 
+        if (rb.linearVelocity.y > 0 && !jumpHeld)
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+
+        float gravMultiplier = rb.linearVelocity.y < 0 ? downGravity : 1f;
+        rb.linearVelocity -= Vector2.up * upGravity * gravMultiplier * Time.fixedDeltaTime;
+
         if (!wasGrounded && isGrounded)
         {
             if (jumpedSinceLastLanding)
@@ -71,11 +101,11 @@ public class DraculaController : MonoBehaviour
                 if (diffPlatform)
                 {
                     remainingJumps = Mathf.Max(0, remainingJumps - 1);
-                    Debug.Log($"Dracula: Landed on {currentPlatform?.name} (was {launchedPlatform?.name}) — cost 1 jump, {remainingJumps} remaining");
+                    Debug.Log($"Dracula: Landed on {currentPlatform?.name} (was {launchedPlatform?.name}) \u2014 cost 1 jump, {remainingJumps} remaining");
                 }
                 else
                 {
-                    Debug.Log($"Dracula: Landed back on {currentPlatform?.name} — free landing");
+                    Debug.Log($"Dracula: Landed back on {currentPlatform?.name} \u2014 free landing");
                 }
                 jumpedSinceLastLanding = false;
             }
@@ -87,13 +117,13 @@ public class DraculaController : MonoBehaviour
     public void AddJump(int amount)
     {
         remainingJumps = Mathf.Max(0, remainingJumps + amount);
-        Debug.Log($"Dracula: Jumps changed by {amount} → {remainingJumps}");
+        Debug.Log($"Dracula: Jumps changed by {amount} \u2192 {remainingJumps}");
     }
 
     public void MultiplyJumps(int factor)
     {
         remainingJumps *= factor;
-        Debug.Log($"Dracula: Jumps multiplied by {factor} → {remainingJumps}");
+        Debug.Log($"Dracula: Jumps multiplied by {factor} \u2192 {remainingJumps}");
     }
 
     public void WarpTo(Vector3 position, GameObject platform)

@@ -47,7 +47,7 @@ public class characterJuice : MonoBehaviour
 
     [Header("Platformer Toolkit Stuff")]
     [SerializeField] bool showJumpLine;
-    [SerializeField] jumpTester jumpLine;
+    //[SerializeField] jumpTester jumpLine;
     public bool cameraFalling = false;
 
     void Start()
@@ -93,8 +93,8 @@ public class characterJuice : MonoBehaviour
             playerGrounded = true;
             cameraFalling = false;
 
-            //This is related to the "ignore jumps" option on the camera panel.
-            jumpLine.characterY = transform.position.y;
+            ////This is related to the "ignore jumps" option on the camera panel.
+            //jumpLine.characterY = transform.position.y;
 
             //Play an animation, some particles, and a sound effect when the player lands
             myAnimator.SetTrigger("Landed");
@@ -125,16 +125,16 @@ public class characterJuice : MonoBehaviour
 
     private void checkForGoingPastJumpLine()
     {
-        //This is related to the "ignore jumps" option on the camera panel.
-        if (transform.position.y < jumpLine.transform.position.y - 3)
-        {
-            cameraFalling = true;
-        }
+        ////This is related to the "ignore jumps" option on the camera panel.
+        //if (transform.position.y < jumpLine.transform.position.y - 3)
+        //{
+        //    cameraFalling = true;
+        //}
 
-        if (cameraFalling)
-        {
-            jumpLine.characterY = transform.position.y;
-        }
+        //if (cameraFalling)
+        //{
+        //    jumpLine.characterY = transform.position.y;
+        //}
     }
 
     public void jumpEffects()
