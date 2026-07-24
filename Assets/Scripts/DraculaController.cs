@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class DraculaController : MonoBehaviour
 {
+    public bool playerCanMove = true;
+
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
 
@@ -10,6 +12,7 @@ public class DraculaController : MonoBehaviour
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float jumpDuration = 0.4f;
     [SerializeField][Range(1f, 5f)] private float downGravity = 2.5f;
+    [SerializeField] private float terminalVelocity = 20f;
 
     [Header("Ground Check")]
     [SerializeField] private LayerMask platformLayer;
@@ -58,19 +61,22 @@ public class DraculaController : MonoBehaviour
 
     void Update()
     {
-        float moveInput = Input.GetAxisRaw("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-
-        jumpHeld = Input.GetButton("Jump") || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-
-        if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-            && isGrounded && remainingJumps > 0)
+        if (playerCanMove)
         {
-            launchedPlatform = currentPlatform;
-            jumpedSinceLastLanding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
-            Debug.Log($"Dracula: Jump from {launchedPlatform?.name} (charges: {remainingJumps})");
-            OnJump?.Invoke();
+            float moveInput = Input.GetAxisRaw("Horizontal");
+            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+            jumpHeld = Input.GetButton("Jump") || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+
+            if ((Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+                && isGrounded && remainingJumps > 0)
+            {
+                launchedPlatform = currentPlatform;
+                jumpedSinceLastLanding = true;
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
+                Debug.Log($"Dracula: Jump from {launchedPlatform?.name} (charges: {remainingJumps})");
+                OnJump?.Invoke();
+            }
         }
     }
 
@@ -92,6 +98,9 @@ public class DraculaController : MonoBehaviour
 
         float gravMultiplier = rb.linearVelocity.y < 0 ? downGravity : 1f;
         rb.linearVelocity -= Vector2.up * upGravity * gravMultiplier * Time.fixedDeltaTime;
+
+        if (rb.linearVelocity.y < -terminalVelocity)
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -terminalVelocity);
 
         if (!wasGrounded && isGrounded)
         {

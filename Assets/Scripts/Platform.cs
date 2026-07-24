@@ -73,7 +73,7 @@ public class Platform : MonoBehaviour
         if (crumbleParticles != null)
             crumbleParticles.Play();
 
+        this.gameObject.SetActive(false);
         onCrumble?.Invoke();
-        Destroy(this.gameObject);
     }
 }
