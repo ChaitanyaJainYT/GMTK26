@@ -40,12 +40,8 @@ public class Platform : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
         if (type != PlatformType.Crumble || isCrumbleTriggered) return;
 
-        DraculaController dracula = collision.gameObject.GetComponent<DraculaController>();
-        if (dracula != null && dracula.RemainingJumps > 0)
-        {
-            Debug.Log($"Platform [{platformId}]: Crumble triggered by Dracula");
-            StartCoroutine(CrumbleRoutine());
-        }
+        Debug.Log($"Platform [{platformId}]: Crumble triggered by Dracula");
+        StartCoroutine(CrumbleRoutine());
     }
 
     private System.Collections.IEnumerator CrumbleRoutine()
