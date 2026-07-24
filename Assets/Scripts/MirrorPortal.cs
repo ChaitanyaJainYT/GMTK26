@@ -31,7 +31,7 @@ public class MirrorPortal : MonoBehaviour
         DraculaController dracula = other.GetComponent<DraculaController>();
         if (dracula == null) return;
 
-        Vector3 warpPos = otherPortal.transform.position;
+        Vector3 warpPos = otherPortal.transform.position + (0.4f * Vector3.down);
         Platform platform = otherPortal.GetComponentInParent<Platform>();
         GameObject platformObj = platform != null ? platform.gameObject : null;
 

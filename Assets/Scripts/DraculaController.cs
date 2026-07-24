@@ -137,7 +137,8 @@ public class DraculaController : MonoBehaviour
 
     public void WarpTo(Vector3 position, GameObject platform)
     {
-        rb.position = position;
+        //rb.position = position;
+        this.transform.position = position;
         currentPlatform = platform;
         launchedPlatform = null;
         jumpedSinceLastLanding = false;
