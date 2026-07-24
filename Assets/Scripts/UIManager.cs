@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
     private void UpdateJumpDisplay(int count)
     {
         if (jumpCountText != null)
-            jumpCountText.text = $"Jumps: {count}";
+            jumpCountText.text = $"{count}";
     }
 
     private void ShowWinPanel()

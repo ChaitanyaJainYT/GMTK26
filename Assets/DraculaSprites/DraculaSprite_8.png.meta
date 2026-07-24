@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3963cf04568b19c4ab39dbe8ad785c8e
+guid: 4ce47dd4b07ffcb4f87707551cdf0efc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2377544150705889232
-    second: DraculaSprite_0
+      213: -1178401089129909370
+    second: DraculaSprite_8_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DraculaSprite_0
+      name: DraculaSprite_8_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0302e531134410fd0800000000000000
-      internalID: -2377544150705889232
+      spriteID: 6837a7fe37a75afe0800000000000000
+      internalID: -1178401089129909370
       vertices: []
       indices: 
       edges: []
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      DraculaSprite_0: -2377544150705889232
+      DraculaSprite_8_0: -1178401089129909370
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
