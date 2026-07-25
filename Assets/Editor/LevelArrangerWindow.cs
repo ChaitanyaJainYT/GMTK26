@@ -35,9 +35,8 @@ public class LevelArrangerWindow : EditorWindow
 
     private void SetupReorderableList()
     {
-        reorderableList = new ReorderableList(buildScenes, typeof(EditorBuildSettingsScene), true, true, true, true);
+        reorderableList = new ReorderableList(buildScenes, typeof(EditorBuildSettingsScene), true, true, false, true);
 
-        // Make the rows tall enough for our camera previews
         reorderableList.elementHeight = 80;
 
         reorderableList.drawHeaderCallback = (Rect rect) => {
@@ -45,6 +44,8 @@ public class LevelArrangerWindow : EditorWindow
         };
 
         reorderableList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) => {
+            if (index < 0 || index >= buildScenes.Count) return;
+
             var scene = buildScenes[index];
             string sceneName = Path.GetFileNameWithoutExtension(scene.path);
 
@@ -64,12 +65,26 @@ public class LevelArrangerWindow : EditorWindow
             EditorGUI.LabelField(labelRect, $"{index}. {sceneName}", EditorStyles.boldLabel);
 
             // Enable/Disable toggle
-            Rect toggleRect = new Rect(rect.x + 140, rect.y + 50, 60, EditorGUIUtility.singleLineHeight);
-            scene.enabled = EditorGUI.ToggleLeft(toggleRect, "Enabled", scene.enabled);
+            Rect toggleRect = new Rect(rect.x + 140, rect.y + 50, 100, EditorGUIUtility.singleLineHeight);
+
+            // FIX: Listen specifically for this checkbox being clicked
+            EditorGUI.BeginChangeCheck();
+            bool isEnabled = EditorGUI.ToggleLeft(toggleRect, "Enabled", scene.enabled);
+            if (EditorGUI.EndChangeCheck())
+            {
+                scene.enabled = isEnabled;
+                SaveToBuildSettings(); // Push the change to Unity immediately
+            }
         };
 
         reorderableList.onChangedCallback = (ReorderableList list) => {
             SaveToBuildSettings();
+        };
+
+        reorderableList.onRemoveCallback = (ReorderableList list) => {
+            buildScenes.RemoveAt(list.index);
+            SaveToBuildSettings();
+            GUIUtility.ExitGUI();
         };
     }
 
@@ -82,23 +97,109 @@ public class LevelArrangerWindow : EditorWindow
     {
         GUILayout.Space(10);
 
-        EditorGUILayout.HelpBox("This list matches your Build Settings. Drag items to reorder them.", MessageType.Info);
+        EditorGUILayout.HelpBox("Drag scene assets from the Project window anywhere into this window to add them.", MessageType.Info);
 
-        if (GUILayout.Button("Generate Camera Previews (Takes a moment)", GUILayout.Height(30)))
+        // Top Button Row
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Refresh List", GUILayout.Height(25)))
+        {
+            RefreshData();
+        }
+        if (GUILayout.Button("Add All Scenes In Project", GUILayout.Height(25)))
+        {
+            AddAllScenesInProject();
+        }
+        if (GUILayout.Button("Generate Camera Previews (Takes a moment)", GUILayout.Height(25)))
         {
             GenerateThumbnails();
         }
+        GUILayout.EndHorizontal();
 
         GUILayout.Space(10);
 
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
         reorderableList.DoLayoutList();
         EditorGUILayout.EndScrollView();
+
+        // Handle Drag and Drop events over the window
+        HandleDragAndDrop();
+    }
+
+    private void RefreshData()
+    {
+        LoadBuildSettings();
+        LoadExistingPreviews();
+        Repaint();
+    }
+
+    private void AddAllScenesInProject()
+    {
+        string[] guids = AssetDatabase.FindAssets("t:Scene");
+        bool changed = false;
+
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+
+            // Check if it's already in the list to avoid duplicates
+            if (!buildScenes.Any(s => s.path == path))
+            {
+                buildScenes.Add(new EditorBuildSettingsScene(path, true));
+                changed = true;
+            }
+        }
+
+        if (changed)
+        {
+            SaveToBuildSettings();
+            LoadExistingPreviews();
+        }
+    }
+
+    private void HandleDragAndDrop()
+    {
+        Event evt = Event.current;
+        Rect dropArea = new Rect(0, 0, position.width, position.height);
+
+        switch (evt.type)
+        {
+            case EventType.DragUpdated:
+            case EventType.DragPerform:
+                if (!dropArea.Contains(evt.mousePosition))
+                    return;
+
+                DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+
+                if (evt.type == EventType.DragPerform)
+                {
+                    DragAndDrop.AcceptDrag();
+                    bool changed = false;
+
+                    foreach (string path in DragAndDrop.paths)
+                    {
+                        // Ensure we are only dropping Unity scenes
+                        if (path.EndsWith(".unity"))
+                        {
+                            if (!buildScenes.Any(s => s.path == path))
+                            {
+                                buildScenes.Add(new EditorBuildSettingsScene(path, true));
+                                changed = true;
+                            }
+                        }
+                    }
+
+                    if (changed)
+                    {
+                        SaveToBuildSettings();
+                        LoadExistingPreviews();
+                    }
+                }
+                break;
+        }
     }
 
     private void GenerateThumbnails()
     {
-        // Ask to save current scene before we start opening others
         if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
 
         if (!Directory.Exists(PREVIEW_FOLDER))
@@ -117,10 +218,8 @@ public class LevelArrangerWindow : EditorWindow
 
                 EditorUtility.DisplayProgressBar("Generating Previews", $"Opening {Path.GetFileNameWithoutExtension(sceneInfo.path)}", (float)i / buildScenes.Count);
 
-                // Open the scene
                 var scene = EditorSceneManager.OpenScene(sceneInfo.path, OpenSceneMode.Single);
 
-                // Robust camera fallback: try MainCamera tag first, then find ANY camera if the tag is missing
                 Camera cam = Camera.main;
                 if (cam == null) cam = FindObjectOfType<Camera>();
 
@@ -139,7 +238,6 @@ public class LevelArrangerWindow : EditorWindow
         finally
         {
             EditorUtility.ClearProgressBar();
-            // Return to the scene you were originally working on
             if (!string.IsNullOrEmpty(startingScenePath))
             {
                 EditorSceneManager.OpenScene(startingScenePath);
@@ -151,7 +249,7 @@ public class LevelArrangerWindow : EditorWindow
     private Texture2D CaptureCameraOutput(Camera camera)
     {
         int width = 256;
-        int height = 144; // 16:9 aspect ratio
+        int height = 144;
 
         RenderTexture rt = new RenderTexture(width, height, 24);
         camera.targetTexture = rt;
