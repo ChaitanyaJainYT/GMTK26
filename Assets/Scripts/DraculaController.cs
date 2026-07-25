@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class DraculaController : MonoBehaviour
@@ -70,6 +71,7 @@ public class DraculaController : MonoBehaviour
     void OnValidate()
     {
         RecomputeJumpParams();
+        GetComponentInChildren<TMP_Text>().text = remainingJumps.ToString();
     }
 
     private void RecomputeJumpParams()
