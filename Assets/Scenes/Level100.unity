@@ -2082,6 +2082,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2553899175196751861, guid: eea50730ab25f7c43be4385d9994282a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553899175196751861, guid: eea50730ab25f7c43be4385d9994282a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.299999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399574313296274146, guid: eea50730ab25f7c43be4385d9994282a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399574313296274146, guid: eea50730ab25f7c43be4385d9994282a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.299999
+      objectReference: {fileID: 0}
     - target: {fileID: 6181549756972338044, guid: eea50730ab25f7c43be4385d9994282a, type: 3}
       propertyPath: m_Name
       value: Border

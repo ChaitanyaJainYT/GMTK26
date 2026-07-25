@@ -44,7 +44,7 @@ public class Platform : MonoBehaviour
 
         if (sr != null)
         {
-            sr.drawMode = SpriteDrawMode.Sliced;
+            sr.drawMode = SpriteDrawMode.Tiled;
             sr.size = new Vector2(width, height);
         }
 
