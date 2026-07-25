@@ -66,6 +66,12 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             GameManager.Instance?.ReloadLevel();
 
+        if (Input.GetKeyDown(KeyCode.P))
+            GameManager.Instance?.LoadPreviousLevel();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
         bool confirm = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter);
         if (confirm)
         {

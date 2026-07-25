@@ -59,6 +59,7 @@ public class Coffin : MonoBehaviour
     private void triggered(Collider2D other)
     {
         if (isTriggered) return;
+        if (GameManager.Instance != null && !GameManager.Instance.IsPlaying) return;
 
         if (!other.CompareTag("Player")) return;
 

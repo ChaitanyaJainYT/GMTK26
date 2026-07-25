@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private GameState state = GameState.Playing;
+    public bool IsPlaying => state == GameState.Playing;
 
     public static event Action<int> OnJumpCountChanged;
     public static event Action OnLevelWin;
@@ -80,6 +81,18 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager: Reloading level...");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadPreviousLevel()
+    {
+        int prev = SceneManager.GetActiveScene().buildIndex - 1;
+        if (prev >= 0)
+        {
+            Debug.Log($"GameManager: Loading previous level (index {prev})");
+            SceneManager.LoadScene(prev);
+        }
+        else
+            Debug.Log("GameManager: Already at first level");
     }
 
     public void LoadNextLevel()
