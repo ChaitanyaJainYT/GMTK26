@@ -29,16 +29,28 @@ public class DraculaController : MonoBehaviour
     [SerializeField] private int remainingJumps = 3;
 
     public int RemainingJumps => remainingJumps;
+    public bool IsGrounded => isGrounded;
     public GameObject CurrentPlatform { get => currentPlatform; set => currentPlatform = value; }
-    public bool HasKey { get; set; }
+    public bool HasKey
+    {
+        get => hasKey;
+        set
+        {
+            if (hasKey == value) return;
+            hasKey = value;
+            OnHasKeyChanged?.Invoke(hasKey);
+        }
+    }
 
     public event System.Action<GameObject> OnLanded;
+    public event System.Action<bool> OnHasKeyChanged;
     public event System.Action OnJump;
 
     private Rigidbody2D rb;
     private Collider2D col;
     private float jumpVelocity;
     private float upGravity;
+    private bool hasKey;
     private bool isGrounded;
     private bool jumpHeld;
     private GameObject currentPlatform;

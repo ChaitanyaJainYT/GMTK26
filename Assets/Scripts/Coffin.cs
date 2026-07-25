@@ -18,6 +18,8 @@ public class Coffin : MonoBehaviour
     private BoxCollider2D triggerCol;
     private AudioSource audioSource;
     private bool isUnlocked;
+    private DraculaController dracula;
+    private bool isTriggered = false;
 
     void OnValidate()
     {
@@ -35,8 +37,29 @@ public class Coffin : MonoBehaviour
         UpdateSprite();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void Start()
     {
+        dracula = FindObjectOfType<DraculaController>();
+        if (dracula != null)
+            dracula.OnHasKeyChanged += HandleHasKeyChanged;
+    }
+
+    void OnDestroy()
+    {
+        if (dracula != null)
+            dracula.OnHasKeyChanged -= HandleHasKeyChanged;
+    }
+
+    private void HandleHasKeyChanged(bool hasKey)
+    {
+        if (!isUnlocked && requiresKey && hasKey)
+            Unlock();
+    }
+
+    private void triggered(Collider2D other)
+    {
+        if (isTriggered) return;
+
         if (!other.CompareTag("Player")) return;
 
         DraculaController dracula = other.GetComponent<DraculaController>();
@@ -44,7 +67,7 @@ public class Coffin : MonoBehaviour
 
         if (isUnlocked)
         {
-            Win();
+            TryWin(dracula);
             return;
         }
 
@@ -56,7 +79,28 @@ public class Coffin : MonoBehaviour
         }
 
         Unlock();
-        Win();
+        TryWin(dracula);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        triggered(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        triggered(collision);
+    }
+
+    private void TryWin(DraculaController dracula)
+    {
+        if (!dracula.IsGrounded)
+            return;
+
+        if (dracula.RemainingJumps == 0)
+            Win();
+        else if (GameManager.Instance != null)
+            GameManager.Instance.FailLevel("Overload! Sun burns Dracula!");
     }
 
     private void Unlock()
@@ -73,6 +117,7 @@ public class Coffin : MonoBehaviour
 
     private void Win()
     {
+        isTriggered = true;
         if (GameManager.Instance != null)
             GameManager.Instance.WinLevel();
     }
