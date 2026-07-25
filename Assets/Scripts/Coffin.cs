@@ -34,6 +34,7 @@ public class Coffin : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null && unlockSound != null)
             audioSource = gameObject.AddComponent<AudioSource>();
+        isUnlocked = !requiresKey;
         UpdateSprite();
     }
 
