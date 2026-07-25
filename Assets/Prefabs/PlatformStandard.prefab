@@ -150,6 +150,8 @@ MonoBehaviour:
   type: 0
   platformId: 0
   requiresKey: 0
+  width: 4
+  height: 1
   crumbleDelay: 0.8
   shakeIntensity: 0.08
   shakeFrequency: 30

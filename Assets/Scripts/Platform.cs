@@ -12,6 +12,10 @@ public class Platform : MonoBehaviour
     public int platformId;
     public bool requiresKey = false;
 
+    [Header("Size")]
+    [SerializeField] private float width = 4f;
+    [SerializeField] private float height = 1f;
+
     [Header("Crumble Settings")]
     [SerializeField] private float crumbleDelay = 0.8f;
     [SerializeField] private float shakeIntensity = 0.08f;
@@ -21,15 +25,40 @@ public class Platform : MonoBehaviour
 
     public UnityEvent onCrumble;
 
-    private Collider2D col;
+    private SpriteRenderer sr;
+    private BoxCollider2D boxCol;
     private AudioSource audioSource;
     private bool isCrumbleTriggered;
+
+    void OnValidate()
+    {
+        width = Mathf.Max(width, 0.1f);
+        height = Mathf.Max(height, 0.1f);
+        UpdateSize();
+    }
+
+    private void UpdateSize()
+    {
+        if (sr == null) sr = GetComponent<SpriteRenderer>();
+        if (boxCol == null) boxCol = GetComponent<BoxCollider2D>();
+
+        if (sr != null)
+        {
+            sr.drawMode = SpriteDrawMode.Sliced;
+            sr.size = new Vector2(width, height);
+        }
+
+        if (boxCol != null)
+            boxCol.size = new Vector2(width, height);
+    }
 
     void Awake()
     {
         if (platformId == 0)
             platformId = nextId++;
-        col = GetComponent<Collider2D>();
+        sr = GetComponent<SpriteRenderer>();
+        boxCol = GetComponent<BoxCollider2D>();
+        UpdateSize();
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null && crumbleSound != null)
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -62,7 +91,7 @@ public class Platform : MonoBehaviour
         }
 
         transform.localPosition = originalPos;
-        col.enabled = false;
+        boxCol.enabled = false;
 
         Debug.Log($"Platform [{platformId}]: Crumble complete — collider disabled");
 
