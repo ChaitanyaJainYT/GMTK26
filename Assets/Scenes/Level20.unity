@@ -1467,7 +1467,7 @@ MonoBehaviour:
   failReasonText: {fileID: 0}
   retryButton: {fileID: 1717209068}
   nextFloorButton: {fileID: 2027361097}
-  levelTitle: Crypt 1
+  levelTitle: Crypt 2
 --- !u!1001 &1872753354
 PrefabInstance:
   m_ObjectHideFlags: 0
