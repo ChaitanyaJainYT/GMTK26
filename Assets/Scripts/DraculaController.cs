@@ -8,6 +8,12 @@ public class DraculaController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip jumpSfx;
+    [SerializeField] private AudioClip landSfx;
+
+    private AudioSource audioSource;
+
     [Header("Jump")]
     [SerializeField] private float jumpHeight = 4f;
     [SerializeField] private float jumpDuration = 0.4f;
@@ -43,6 +49,9 @@ public class DraculaController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
         RecomputeJumpParams();
     }
 
@@ -73,8 +82,9 @@ public class DraculaController : MonoBehaviour
             {
                 launchedPlatform = currentPlatform;
                 jumpedSinceLastLanding = true;
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
-                Debug.Log($"Dracula: Jump from {launchedPlatform?.name} (charges: {remainingJumps})");
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpVelocity);
+            if (jumpSfx != null) audioSource.PlayOneShot(jumpSfx);
+            Debug.Log($"Dracula: Jump from {launchedPlatform?.name} (charges: {remainingJumps})");
                 OnJump?.Invoke();
             }
         }
@@ -119,6 +129,7 @@ public class DraculaController : MonoBehaviour
                 jumpedSinceLastLanding = false;
             }
 
+            if (landSfx != null) audioSource.PlayOneShot(landSfx);
             OnLanded?.Invoke(currentPlatform);
         }
     }

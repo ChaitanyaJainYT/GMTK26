@@ -154,7 +154,7 @@ MonoBehaviour:
   shakeIntensity: 0.08
   shakeFrequency: 30
   crumbleParticles: {fileID: 0}
-  crumbleSound: {fileID: 0}
+  crumbleSound: {fileID: 8300000, guid: a1065755565f90c47881bcf02006b100, type: 3}
   onCrumble:
     m_PersistentCalls:
       m_Calls: []

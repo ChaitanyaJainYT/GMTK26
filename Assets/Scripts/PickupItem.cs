@@ -9,15 +9,6 @@ public class PickupItem : MonoBehaviour
     [SerializeField] private ParticleSystem collectParticles;
     [SerializeField] private AudioClip collectSound;
 
-    private AudioSource audioSource;
-
-    void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null && collectSound != null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;
@@ -26,7 +17,7 @@ public class PickupItem : MonoBehaviour
         if (dracula == null) return;
 
         ApplyEffect(dracula);
-        PlayEffects();
+        PlayEffects(dracula);
         Destroy(gameObject);
     }
 
@@ -53,10 +44,14 @@ public class PickupItem : MonoBehaviour
         }
     }
 
-    private void PlayEffects()
+    private void PlayEffects(DraculaController dracula)
     {
-        if (collectSound != null && audioSource != null)
-            audioSource.PlayOneShot(collectSound);
+        if (collectSound != null)
+        {
+            AudioSource playerAudio = dracula.GetComponent<AudioSource>();
+            if (playerAudio != null)
+                playerAudio.PlayOneShot(collectSound);
+        }
 
         if (collectParticles != null)
         {

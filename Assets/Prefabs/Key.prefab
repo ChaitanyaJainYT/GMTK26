@@ -162,4 +162,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 3
   collectParticles: {fileID: 0}
-  collectSound: {fileID: 0}
+  collectSound: {fileID: 8300000, guid: 12e3a490c7479124197909edb8cddbda, type: 3}

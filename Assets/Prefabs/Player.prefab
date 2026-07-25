@@ -295,6 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCanMove: 1
   moveSpeed: 10
+  jumpSfx: {fileID: 8300000, guid: 6dfac44dea22ce5479be4036754d6f1f, type: 3}
+  landSfx: {fileID: 8300000, guid: 276d6b6de505482429d91edad520affb, type: 3}
   jumpHeight: 2
   jumpDuration: 0.4
   downGravity: 2

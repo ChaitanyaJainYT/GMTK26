@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherPortal: {fileID: 3702610803924070094}
   warpParticles: {fileID: 0}
-  warpSound: {fileID: 0}
+  warpSound: {fileID: 8300000, guid: bc36acddc569be0418550856b64eb904, type: 3}
 --- !u!1 &5098367557231196784
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,4 +312,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherPortal: {fileID: 2577271865623255205}
   warpParticles: {fileID: 0}
-  warpSound: {fileID: 0}
+  warpSound: {fileID: 8300000, guid: bc36acddc569be0418550856b64eb904, type: 3}
