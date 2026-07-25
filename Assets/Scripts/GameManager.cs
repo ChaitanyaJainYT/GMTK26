@@ -55,9 +55,14 @@ public class GameManager : MonoBehaviour
         WinLevel();
     }
 
-    void WinLevel()
+    public void WinLevel()
     {
         state = GameState.LevelWin;
+        //if (dracula != null)
+        //{
+        //    dracula.playerCanMove = false;
+        //    dracula.StopMovement();
+        //}
         Debug.Log("GameManager: Level Win!");
         OnLevelWin?.Invoke();
     }
