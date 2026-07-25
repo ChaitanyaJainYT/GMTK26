@@ -62,11 +62,12 @@ public class GameManager : MonoBehaviour
         OnLevelWin?.Invoke();
     }
 
-    void FailLevel(string reason)
+    public void FailLevel(string reason)
     {
         state = GameState.LevelFailed;
         Debug.Log($"GameManager: Level Failed — {reason}");
         dracula.playerCanMove = false;
+        dracula.StopMovement();
         OnLevelFailed?.Invoke(reason);
     }
 

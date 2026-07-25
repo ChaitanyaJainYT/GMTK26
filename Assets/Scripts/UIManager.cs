@@ -33,6 +33,9 @@ public class UIManager : MonoBehaviour
     {
         dracula = FindObjectOfType<DraculaController>();
 
+        if (jumpCountText == null)
+            jumpCountText = dracula?.GetComponentInChildren<TMP_Text>();
+
         if (levelTitleText != null)
             levelTitleText.text = levelTitle;
 

@@ -146,6 +146,16 @@ public class DraculaController : MonoBehaviour
         Debug.Log($"Dracula: Jumps multiplied by {factor} \u2192 {remainingJumps}");
     }
 
+    public void StopMovement()
+    {
+        playerCanMove = false;
+        rb.linearVelocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.AddTorque(0.1f);
+        //rb.gravityScale = 0f;
+        //rb.bodyType = RigidbodyType2D.Static;
+    }
+
     public void WarpTo(Vector3 position, GameObject platform)
     {
         //rb.position = position;
