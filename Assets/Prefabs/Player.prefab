@@ -280,7 +280,7 @@ MonoBehaviour:
   eyeColor: {r: 0.93, g: 0.26, b: 0.26, a: 1}
   waveSpeed: 10
   waveAmount: 1.5
-  dragStrength: 0.8
+  dragStrength: 0.5
 --- !u!114 &1774782050170225401
 MonoBehaviour:
   m_ObjectHideFlags: 0

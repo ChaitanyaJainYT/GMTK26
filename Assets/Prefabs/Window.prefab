@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3811192484594183451}
-  - component: {fileID: 7664140375929093216}
   m_Layer: 0
   m_Name: Window
   m_TagString: Untagged
@@ -30,17 +29,50 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5661428108011421684}
   - {fileID: 7183874501010409377}
   - {fileID: 2023711901888097175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7664140375929093216
+--- !u!1 &1221455002850736530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5661428108011421684}
+  - component: {fileID: 369952731039069571}
+  m_Layer: 0
+  m_Name: WindowSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5661428108011421684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221455002850736530}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3811192484594183451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &369952731039069571
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631802906247425199}
+  m_GameObject: {fileID: 1221455002850736530}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -168,7 +200,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 8024641625623681528, guid: 944a62e78c197c246926620c2e9d6add, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7075472, g: 0.6510404, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -236,10 +268,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c233744e49084249b74b65b6fde1756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetWindow: {fileID: 0}
+  isPressed: 0
+  targetWindow: {fileID: 25945581435265580}
+  windowSprite: {fileID: 369952731039069571}
+  windowOpenSprite: {fileID: 6419894029306337756, guid: 7e31976b5041c5a419801fee1c52e5f4, type: 3}
+  windowClosedSprite: {fileID: -1842087200792556665, guid: 7e31976b5041c5a419801fee1c52e5f4, type: 3}
   plateSprite: {fileID: 2590249100082935949}
-  pressedColor: {r: 0.45099998, g: 0.45099998, b: 0.45099998, a: 1}
-  releasedColor: {r: 1, g: 1, b: 1, a: 1}
+  pressedColor: {r: 0.5660378, g: 0, b: 0, a: 1}
+  releasedColor: {r: 0.7075472, g: 0.6510404, b: 0, a: 1}
 --- !u!1001 &8160573786320360602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257,8 +293,20 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: ddba7a18c50ef4d46aae1e9c01193e44, type: 3}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: ddba7a18c50ef4d46aae1e9c01193e44, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: ddba7a18c50ef4d46aae1e9c01193e44, type: 3}
       propertyPath: m_Color.a
       value: 0.5019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: ddba7a18c50ef4d46aae1e9c01193e44, type: 3}
+      propertyPath: m_DrawMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: ddba7a18c50ef4d46aae1e9c01193e44, type: 3}
       propertyPath: m_SortingOrder
@@ -266,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: ddba7a18c50ef4d46aae1e9c01193e44, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: ddba7a18c50ef4d46aae1e9c01193e44, type: 3}
       propertyPath: m_LocalPosition.y
@@ -359,12 +407,12 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 4, y: 1}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &25945581435265580
 MonoBehaviour:
@@ -378,6 +426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c738de687ee6c8644b7b025d4f330942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 4
+  height: 1
   lightBeam: {fileID: 4833852925854762110}
   failMessage: Dracula was caught in the light!
 --- !u!4 &2023711901888097175 stripped
