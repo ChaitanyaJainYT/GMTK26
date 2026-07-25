@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8c263c4cd5bffcf40b58aa7becc99fea
+guid: c9c546af189e9d146b09416619ddaf5e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -32,10 +32,10 @@ ScriptedImporter:
     sRGBTexture: 1
     spriteMode: 2
     spriteExtrude: 1
-    spriteMeshType: 0
+    spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 16
+    spritePixelsToUnits: 1000
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639206116360378239
+  platformSettingsDirtyTick: 639206116360394039
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -122,19 +122,19 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: platform_floor
+  - name: coffin
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
-      height: 16
-    spriteID: a69ddfd94b4cdbc41962ccf15864cec9
+      width: 33
+      height: 32
+    spriteID: a00f8edb3572c594281658b6554fd309
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -146,21 +146,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 853209200
-    name: platform_floor
+    guid: 1243191863
+    name: coffin
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: platform_floor
+    - name: coffin
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
         x: 0
         y: 0
-        width: 16
-        height: 16
-      spriteId: a69ddfd94b4cdbc41962ccf15864cec9
+        width: 33
+        height: 32
+      spriteId: a00f8edb3572c594281658b6554fd309
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -227,4 +227,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 16, y: 16}
+  canvasSize: {x: 33, y: 32}

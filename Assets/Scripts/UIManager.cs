@@ -65,6 +65,15 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
             GameManager.Instance?.ReloadLevel();
+
+        bool confirm = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter);
+        if (confirm)
+        {
+            if (winPanel != null && winPanel.activeSelf && nextFloorButton != null)
+                nextFloorButton.onClick.Invoke();
+            else if (failPanel != null && failPanel.activeSelf && retryButton != null)
+                retryButton.onClick.Invoke();
+        }
     }
 
     private void UpdateJumpDisplay(int count)
