@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
             GameManager.Instance?.LoadPreviousLevel();
 
         if (Input.GetKeyDown(KeyCode.Escape))
-            Application.Quit();
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 
         bool confirm = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter);
         if (confirm)
