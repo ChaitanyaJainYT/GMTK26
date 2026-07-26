@@ -23,39 +23,39 @@ MonoBehaviour:
   - m_enabled: 0
     m_path: Assets/Scenes/SampleScene.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level10.unity
+    m_path: Assets/Scenes/Dawn 1.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level20.unity
+    m_path: Assets/Scenes/Dawn 2.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level30.unity
+    m_path: Assets/Scenes/Dawn 3.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level40.unity
+    m_path: Assets/Scenes/Dawn 4.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level50.unity
+    m_path: Assets/Scenes/Dawn 6.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level60.unity
+    m_path: Assets/Scenes/Dawn 8.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level70.unity
+    m_path: Assets/Scenes/Dawn 9.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level80.unity
+    m_path: Assets/Scenes/Dawn 10.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level90.unity
+    m_path: Assets/Scenes/Day 3.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level100.unity
+    m_path: Assets/Scenes/Rise 4.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level110.unity
+    m_path: Assets/Scenes/Rise 5.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level120.unity
+    m_path: Assets/Scenes/Rise 1.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level130.unity
+    m_path: Assets/Scenes/Rise 2.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level140.unity
+    m_path: Assets/Scenes/Day 4.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level150.unity
+    m_path: Assets/Scenes/Rise 3.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level160.unity
+    m_path: Assets/Scenes/Day 5.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Level170.unity
+    m_path: Assets/Scenes/Rise 6.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:

@@ -9,71 +9,68 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d180d157d506cc547a199533eb1ebb19
   - enabled: 1
-    path: Assets/Scenes/Level10.unity
+    path: Assets/Scenes/Dawn 1.unity
     guid: 25e9a99feaf491b40a60b95ef00d5d11
   - enabled: 1
-    path: Assets/Scenes/Level20.unity
+    path: Assets/Scenes/Dawn 2.unity
     guid: 5f74999a2ab046a4097790d60230eb04
   - enabled: 1
-    path: Assets/Scenes/Level30.unity
+    path: Assets/Scenes/Dawn 3.unity
     guid: 6a8e6021b8a730b489bbf08b5cd6e434
   - enabled: 1
-    path: Assets/Scenes/Level40.unity
+    path: Assets/Scenes/Dawn 4.unity
     guid: 788ece48a7d22164e9c421aa7f784ec3
   - enabled: 1
-    path: Assets/Scenes/Level200.unity
+    path: Assets/Scenes/Dawn 5.unity
     guid: db3f02af3331a2b49b490a5e6d33c16f
   - enabled: 1
-    path: Assets/Scenes/Level50.unity
+    path: Assets/Scenes/Dawn 6.unity
     guid: d725ba8b4c8b28d4e9d600d6976a2e0c
   - enabled: 1
-    path: Assets/Scenes/Level210.unity
+    path: Assets/Scenes/Dawn 7.unity
     guid: 20cc053d037dcef46b40fd287ba8420a
   - enabled: 1
-    path: Assets/Scenes/Level60.unity
+    path: Assets/Scenes/Dawn 8.unity
     guid: fe77f0b7ce740824cadcbad09acf8c80
   - enabled: 1
-    path: Assets/Scenes/Level70.unity
+    path: Assets/Scenes/Dawn 9.unity
     guid: 005fa90caf2a11c4e9f132d269316d43
   - enabled: 1
-    path: Assets/Scenes/Level80.unity
+    path: Assets/Scenes/Dawn 10.unity
     guid: d1545ea15b7c1924eb6a59d723f56780
   - enabled: 1
-    path: Assets/Scenes/Level120.unity
+    path: Assets/Scenes/Rise 1.unity
     guid: da90939acabfad141967e9b431e8904e
   - enabled: 1
-    path: Assets/Scenes/Level130.unity
+    path: Assets/Scenes/Rise 2.unity
     guid: eb1fdc3974174c143b030b2ca9adfc9f
   - enabled: 1
-    path: Assets/Scenes/Level150.unity
+    path: Assets/Scenes/Rise 3.unity
     guid: b1b0c09f1d5a91c409a66f2e45c2a078
   - enabled: 1
-    path: Assets/Scenes/Level100.unity
+    path: Assets/Scenes/Rise 4.unity
     guid: f664965e066a3614fa520e2ef4daa3cc
   - enabled: 1
-    path: Assets/Scenes/Level110.unity
+    path: Assets/Scenes/Rise 5.unity
     guid: faa9712362fff2a4c8717389f4b3cb3c
   - enabled: 1
-    path: Assets/Scenes/Level170.unity
+    path: Assets/Scenes/Rise 6.unity
     guid: 4c82a43b7e89aa646b0c8d69130eb889
   - enabled: 1
-    path: Assets/Scenes/Level180.unity
+    path: Assets/Scenes/Day 1.unity
     guid: 8ec8779756207414c8131d193d2bca2b
   - enabled: 1
-    path: Assets/Scenes/Level190.unity
+    path: Assets/Scenes/Day 2.unity
     guid: af3d653e8e484504bb40decca9f53551
   - enabled: 1
-    path: Assets/Scenes/Level90.unity
+    path: Assets/Scenes/Day 3.unity
     guid: 2037e3c9dccdcea4e8403d0836039250
   - enabled: 1
-    path: Assets/Scenes/Level140.unity
+    path: Assets/Scenes/Day 4.unity
     guid: 9a7aeb4a88db7e149a2b40ecfbb40190
   - enabled: 1
-    path: Assets/Scenes/Level160.unity
+    path: Assets/Scenes/Day 5.unity
     guid: d8797b5bcb8fd0d4da63668938dc7ce6
-  - enabled: 1
-    path: Assets/Scenes/Level220.unity
-    guid: f080ca58bba9d044e81efefd8a6ffe89
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
