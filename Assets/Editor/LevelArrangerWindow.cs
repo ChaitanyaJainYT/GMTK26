@@ -256,6 +256,7 @@ public class LevelArrangerWindow : EditorWindow
                     {
                         SaveToBuildSettings();
                         LoadExistingPreviews();
+                        Repaint();
                     }
                 }
                 break;
