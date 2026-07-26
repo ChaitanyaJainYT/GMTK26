@@ -46,16 +46,22 @@ EditorBuildSettings:
     guid: eb1fdc3974174c143b030b2ca9adfc9f
   - enabled: 1
     path: Assets/Scenes/Rise 3.unity
-    guid: b1b0c09f1d5a91c409a66f2e45c2a078
+    guid: 25396f857fca2764881cc0bc8c287755
   - enabled: 1
     path: Assets/Scenes/Rise 4.unity
-    guid: f664965e066a3614fa520e2ef4daa3cc
+    guid: b1b0c09f1d5a91c409a66f2e45c2a078
   - enabled: 1
     path: Assets/Scenes/Rise 5.unity
-    guid: faa9712362fff2a4c8717389f4b3cb3c
+    guid: f664965e066a3614fa520e2ef4daa3cc
   - enabled: 1
     path: Assets/Scenes/Rise 6.unity
+    guid: faa9712362fff2a4c8717389f4b3cb3c
+  - enabled: 1
+    path: Assets/Scenes/Rise 7.unity
     guid: 4c82a43b7e89aa646b0c8d69130eb889
+  - enabled: 1
+    path: Assets/Scenes/Rise 8.unity
+    guid: d2bddddc26edec4479a7d95608ad0fc9
   - enabled: 1
     path: Assets/Scenes/Day 1.unity
     guid: 8ec8779756207414c8131d193d2bca2b
@@ -64,13 +70,19 @@ EditorBuildSettings:
     guid: af3d653e8e484504bb40decca9f53551
   - enabled: 1
     path: Assets/Scenes/Day 3.unity
-    guid: 2037e3c9dccdcea4e8403d0836039250
+    guid: 1ab5a0b7548df924da92ac3ab62683cc
   - enabled: 1
     path: Assets/Scenes/Day 4.unity
-    guid: 9a7aeb4a88db7e149a2b40ecfbb40190
+    guid: 2037e3c9dccdcea4e8403d0836039250
   - enabled: 1
     path: Assets/Scenes/Day 5.unity
+    guid: 9a7aeb4a88db7e149a2b40ecfbb40190
+  - enabled: 1
+    path: Assets/Scenes/Day 6.unity
     guid: d8797b5bcb8fd0d4da63668938dc7ce6
+  - enabled: 1
+    path: Assets/Scenes/Day 8.unity
+    guid: 60101f3b8adf3d1488b441a9bfb63fc2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

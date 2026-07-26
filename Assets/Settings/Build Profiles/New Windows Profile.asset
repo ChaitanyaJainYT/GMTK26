@@ -51,8 +51,6 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Day 4.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Rise 3.unity
-  - m_enabled: 1
     m_path: Assets/Scenes/Day 5.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Rise 6.unity
