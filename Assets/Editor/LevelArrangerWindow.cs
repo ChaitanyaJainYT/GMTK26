@@ -60,20 +60,58 @@ public class LevelArrangerWindow : EditorWindow
                 EditorGUI.HelpBox(texRect, "No Preview", MessageType.None);
             }
 
-            // Name and Status Rect
-            Rect labelRect = new Rect(rect.x + 140, rect.y + 30, rect.width - 150, EditorGUIUtility.singleLineHeight);
-            EditorGUI.LabelField(labelRect, $"{index}. {sceneName}", EditorStyles.boldLabel);
+            // Index Label
+            Rect indexRect = new Rect(rect.x + 140, rect.y + 30, 25, EditorGUIUtility.singleLineHeight);
+            EditorGUI.LabelField(indexRect, $"{index}.");
+
+            // Name Text Field
+            Rect nameRect = new Rect(rect.x + 165, rect.y + 30, rect.width - 175, EditorGUIUtility.singleLineHeight);
+
+            EditorGUI.BeginChangeCheck();
+            string newSceneName = EditorGUI.DelayedTextField(nameRect, sceneName, EditorStyles.boldLabel);
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (!string.IsNullOrWhiteSpace(newSceneName) && newSceneName != sceneName)
+                {
+                    string oldPath = scene.path;
+                    string errorMessage = AssetDatabase.RenameAsset(oldPath, newSceneName);
+
+                    if (string.IsNullOrEmpty(errorMessage))
+                    {
+                        string newPath = oldPath.Substring(0, oldPath.LastIndexOf('/') + 1) + newSceneName + ".unity";
+                        RenamePreviewFile(oldPath, newPath);
+                        RefreshData();
+                        GUIUtility.ExitGUI();
+                    }
+                    else
+                    {
+                        Debug.LogError($"Level Arranger: Could not rename scene. {errorMessage}");
+                    }
+                }
+            }
 
             // Enable/Disable toggle
-            Rect toggleRect = new Rect(rect.x + 140, rect.y + 50, 100, EditorGUIUtility.singleLineHeight);
+            Rect toggleRect = new Rect(rect.x + 140, rect.y + 50, 75, EditorGUIUtility.singleLineHeight);
 
-            // FIX: Listen specifically for this checkbox being clicked
             EditorGUI.BeginChangeCheck();
             bool isEnabled = EditorGUI.ToggleLeft(toggleRect, "Enabled", scene.enabled);
             if (EditorGUI.EndChangeCheck())
             {
                 scene.enabled = isEnabled;
-                SaveToBuildSettings(); // Push the change to Unity immediately
+                SaveToBuildSettings();
+            }
+
+            // NEW: Open Scene Button
+            Rect openBtnRect = new Rect(rect.x + 220, rect.y + 50, 60, EditorGUIUtility.singleLineHeight);
+            if (GUI.Button(openBtnRect, "Open"))
+            {
+                // Prompt to save current changes before switching scenes
+                if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                {
+                    EditorSceneManager.OpenScene(scene.path);
+                    RefreshData();
+                    GUIUtility.ExitGUI(); // Stop drawing this frame since the scene just changed
+                }
             }
         };
 
@@ -86,6 +124,26 @@ public class LevelArrangerWindow : EditorWindow
             SaveToBuildSettings();
             GUIUtility.ExitGUI();
         };
+    }
+
+    private void RenamePreviewFile(string oldScenePath, string newScenePath)
+    {
+        string oldSafeName = oldScenePath.Replace("/", "_").Replace(".unity", ".png");
+        string newSafeName = newScenePath.Replace("/", "_").Replace(".unity", ".png");
+
+        string oldFilePath = Path.Combine(PREVIEW_FOLDER, oldSafeName);
+        string newFilePath = Path.Combine(PREVIEW_FOLDER, newSafeName);
+
+        if (File.Exists(oldFilePath))
+        {
+            File.Move(oldFilePath, newFilePath);
+
+            // If there's an associated .meta file for the image, rename it too
+            if (File.Exists(oldFilePath + ".meta"))
+            {
+                File.Move(oldFilePath + ".meta", newFilePath + ".meta");
+            }
+        }
     }
 
     private void SaveToBuildSettings()

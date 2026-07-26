@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button nextFloorButton;
 
     [Header("Level Info")]
-    [SerializeField] private string levelTitle = "Crypt 1";
+    [SerializeField] private string levelTitle;
 
     private DraculaController dracula;
 
@@ -37,7 +37,9 @@ public class UIManager : MonoBehaviour
             jumpCountText = dracula?.GetComponentInChildren<TMP_Text>();
 
         if (levelTitleText != null)
-            levelTitleText.text = levelTitle;
+            levelTitleText.text = string.IsNullOrEmpty(levelTitle)
+                ? UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
+                : levelTitle;
 
         if (keyIcon != null)
             keyIcon.enabled = false;

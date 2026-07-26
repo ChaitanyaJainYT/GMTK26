@@ -489,7 +489,7 @@ MonoBehaviour:
   failReasonText: {fileID: 2513607367359819972}
   retryButton: {fileID: 4596532230679317138}
   nextFloorButton: {fileID: 4815453264703348531}
-  levelTitle: Crypt 1
+  levelTitle: 
 --- !u!1 &6771890633296272921
 GameObject:
   m_ObjectHideFlags: 0
