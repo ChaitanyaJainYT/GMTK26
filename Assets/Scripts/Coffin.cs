@@ -76,7 +76,7 @@ public class Coffin : MonoBehaviour
         if (requiresKey && !dracula.HasKey)
         {
             if (GameManager.Instance != null)
-                GameManager.Instance.FailLevel("Locked Coffin! Find the Gothic Key.");
+                GameManager.Instance.FailLevel("Locked Coffin! Find the Key");
             return;
         }
 
@@ -102,7 +102,7 @@ public class Coffin : MonoBehaviour
         if (dracula.RemainingJumps == 0)
             Win();
         else if (GameManager.Instance != null)
-            GameManager.Instance.FailLevel("Overload! Sun burns Dracula!");
+            GameManager.Instance.FailLevel("Extra energy is keeping Count D awake!");
     }
 
     private void Unlock()

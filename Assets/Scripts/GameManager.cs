@@ -43,13 +43,13 @@ public class GameManager : MonoBehaviour
 
         if (keyRequired && !hasKey)
         {
-            FailLevel("Locked Crypt Gate!");
+            FailLevel("Locked Coffin! Find the Key");
             return;
         }
 
         if (hasJumps)
         {
-            FailLevel("Overload! Sun burns Dracula!");
+            FailLevel("Extra energy is keeping Count D awake!");
             return;
         }
 
