@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d48b9a0d6062a424e828f9fa68d3b18c
+guid: 16c5e91814a4151499df6eba06ade60d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639206623994356726
+  platformSettingsDirtyTick: 639206647203547944
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -122,7 +122,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: background_1
+  - name: Frame_0
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -134,7 +134,7 @@ ScriptedImporter:
       y: 4
       width: 569
       height: 320
-    spriteID: e65a0698524e85942b3d311739225466
+    spriteID: b1ddd55d58169044e8eabf3d50de1416
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -143,7 +143,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: background_2
+  - name: Frame_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -155,7 +155,7 @@ ScriptedImporter:
       y: 332
       width: 569
       height: 320
-    spriteID: d8ad390932027014ea9e51c24206486b
+    spriteID: 7e39673d2aecb1f42ab3f9a2e622f0ca
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -164,7 +164,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 332}
-  - name: background_3
+  - name: Frame_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -176,7 +176,7 @@ ScriptedImporter:
       y: 660
       width: 569
       height: 320
-    spriteID: 44e7c99c1057c9f48a1615c6f58913c1
+    spriteID: b5888d3d9842ed64f85df7b5096453e4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -188,8 +188,8 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1978471590
-    name: background
+    guid: 1845136616
+    name: background_normal
     layerFlags: 0
     layerType: 0
     blendMode: 0
@@ -202,7 +202,7 @@ ScriptedImporter:
         y: 0
         width: 569
         height: 320
-      spriteId: e65a0698524e85942b3d311739225466
+      spriteId: b1ddd55d58169044e8eabf3d50de1416
     - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
@@ -211,7 +211,7 @@ ScriptedImporter:
         y: 0
         width: 569
         height: 320
-      spriteId: d8ad390932027014ea9e51c24206486b
+      spriteId: 7e39673d2aecb1f42ab3f9a2e622f0ca
     - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
@@ -220,7 +220,7 @@ ScriptedImporter:
         y: 0
         width: 569
         height: 320
-      spriteId: 44e7c99c1057c9f48a1615c6f58913c1
+      spriteId: b5888d3d9842ed64f85df7b5096453e4
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -242,7 +242,7 @@ ScriptedImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     forceMaximumCompressionQuality_BC6H_BC7: 0
     crunchedCompression: 0
