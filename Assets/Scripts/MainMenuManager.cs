@@ -129,7 +129,16 @@ public class MainMenuManager : MonoBehaviour
 
             int index = i;
             Button btn = btnObj.GetComponent<Button>();
+            btn.interactable = i <= PlayerPrefs.GetInt("LevelsUnlocked", 1);
             btn.onClick.AddListener(() => SceneManager.LoadScene(index));
         }
+    }
+
+    public static void UnlockNextLevel()
+    {
+        int current = PlayerPrefs.GetInt("LevelsUnlocked", 1);
+        int maxLevels = SceneManager.sceneCountInBuildSettings - 1;
+        if (current < maxLevels)
+            PlayerPrefs.SetInt("LevelsUnlocked", current + 1);
     }
 }

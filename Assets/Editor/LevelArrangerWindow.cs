@@ -101,17 +101,23 @@ public class LevelArrangerWindow : EditorWindow
                 SaveToBuildSettings();
             }
 
-            // NEW: Open Scene Button
-            Rect openBtnRect = new Rect(rect.x + 220, rect.y + 50, 60, EditorGUIUtility.singleLineHeight);
+            // Open Scene Button
+            Rect openBtnRect = new Rect(rect.x + 220, rect.y + 50, 45, EditorGUIUtility.singleLineHeight);
             if (GUI.Button(openBtnRect, "Open"))
             {
-                // Prompt to save current changes before switching scenes
                 if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                 {
                     EditorSceneManager.OpenScene(scene.path);
                     RefreshData();
-                    GUIUtility.ExitGUI(); // Stop drawing this frame since the scene just changed
+                    GUIUtility.ExitGUI();
                 }
+            }
+
+            // Generate Preview for this scene only
+            Rect previewBtnRect = new Rect(rect.x + 270, rect.y + 50, 55, EditorGUIUtility.singleLineHeight);
+            if (GUI.Button(previewBtnRect, "Preview"))
+            {
+                GenerateSinglePreview(scene.path);
             }
         };
 
@@ -253,6 +259,41 @@ public class LevelArrangerWindow : EditorWindow
                     }
                 }
                 break;
+        }
+    }
+
+    private void GenerateSinglePreview(string scenePath)
+    {
+        if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
+
+        if (!Directory.Exists(PREVIEW_FOLDER))
+            Directory.CreateDirectory(PREVIEW_FOLDER);
+
+        string originalScene = EditorSceneManager.GetActiveScene().path;
+
+        try
+        {
+            var scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+
+            Camera cam = Camera.main ?? FindObjectOfType<Camera>();
+            if (cam != null)
+            {
+                Texture2D tex = CaptureCameraOutput(cam);
+                SaveTextureAsPNG(tex, scenePath);
+                DestroyImmediate(tex);
+            }
+            else
+            {
+                Debug.LogWarning($"Level Arranger: No camera found in '{Path.GetFileNameWithoutExtension(scenePath)}'. Skipping preview.");
+            }
+        }
+        finally
+        {
+            if (!string.IsNullOrEmpty(originalScene))
+                EditorSceneManager.OpenScene(originalScene);
+
+            LoadExistingPreviews();
+            Repaint();
         }
     }
 

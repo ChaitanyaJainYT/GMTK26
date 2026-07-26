@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         //    dracula.playerCanMove = false;
         //    dracula.StopMovement();
         //}
+        MainMenuManager.UnlockNextLevel();
         Debug.Log("GameManager: Level Win!");
         OnLevelWin?.Invoke();
     }
