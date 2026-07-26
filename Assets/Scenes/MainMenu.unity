@@ -1888,6 +1888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: background
       objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: d48b9a0d6062a424e828f9fa68d3b18c, type: 3}
+      propertyPath: m_SortingOrder
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: d48b9a0d6062a424e828f9fa68d3b18c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
