@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -3153010602172087719, guid: 5e4175ac83e373148b34b89beb2d326b, type: 3}
-  m_Color: {r: 0.3962264, g: 0.2735547, b: 0.08954717, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -150,6 +150,10 @@ MonoBehaviour:
   type: 2
   platformId: 0
   requiresKey: 0
+  standardSprite: {fileID: -1800285803128291152, guid: 1ce5d19b9c4680e42a8ed6fc21d2ab5d, type: 3}
+  startSprite: {fileID: -1800285803128291152, guid: 1ce5d19b9c4680e42a8ed6fc21d2ab5d, type: 3}
+  crumbleSprite: {fileID: -3153010602172087719, guid: 5e4175ac83e373148b34b89beb2d326b, type: 3}
+  goalCryptSprite: {fileID: -2551445254568462967, guid: 8c263c4cd5bffcf40b58aa7becc99fea, type: 3}
   width: 4
   height: 1
   crumbleDelay: 0.8

@@ -150,13 +150,17 @@ MonoBehaviour:
   type: 0
   platformId: 0
   requiresKey: 0
+  standardSprite: {fileID: -1800285803128291152, guid: 1ce5d19b9c4680e42a8ed6fc21d2ab5d, type: 3}
+  startSprite: {fileID: -1800285803128291152, guid: 1ce5d19b9c4680e42a8ed6fc21d2ab5d, type: 3}
+  crumbleSprite: {fileID: -3153010602172087719, guid: 5e4175ac83e373148b34b89beb2d326b, type: 3}
+  goalCryptSprite: {fileID: -2551445254568462967, guid: 8c263c4cd5bffcf40b58aa7becc99fea, type: 3}
   width: 4
   height: 1
   crumbleDelay: 0.8
   shakeIntensity: 0.08
   shakeFrequency: 30
   crumbleParticles: {fileID: 0}
-  crumbleSound: {fileID: 0}
+  crumbleSound: {fileID: 8300000, guid: a1065755565f90c47881bcf02006b100, type: 3}
   onCrumble:
     m_PersistentCalls:
       m_Calls: []

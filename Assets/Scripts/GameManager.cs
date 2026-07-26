@@ -26,8 +26,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         dracula = FindObjectOfType<DraculaController>();
-        if (dracula != null)
-            dracula.OnLanded += HandleLanding;
+        // removed goalCrypt landing check
+        //if (dracula != null)
+        //    dracula.OnLanded += HandleLanding;
     }
 
     void HandleLanding(GameObject platformGO)

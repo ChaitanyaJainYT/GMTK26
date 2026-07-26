@@ -1,2 +1,17 @@
 fileFormatVersion: 2
 guid: 71c0eb288d9a9d04db66f7fd02ff4a94
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - standardSprite: {instanceID: 0}
+  - startSprite: {instanceID: 0}
+  - crumbleSprite: {instanceID: 0}
+  - goalCryptSprite: {instanceID: 0}
+  - crumbleParticles: {instanceID: 0}
+  - crumbleSound: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,6 +12,12 @@ public class Platform : MonoBehaviour
     public int platformId;
     public bool requiresKey = false;
 
+    [Header("Sprites")]
+    [SerializeField] private Sprite standardSprite;
+    [SerializeField] private Sprite startSprite;
+    [SerializeField] private Sprite crumbleSprite;
+    [SerializeField] private Sprite goalCryptSprite;
+
     [Header("Size")]
     [SerializeField] private float width = 4f;
     [SerializeField] private float height = 1f;
@@ -32,9 +38,23 @@ public class Platform : MonoBehaviour
 
     void OnValidate()
     {
-        width = Mathf.Max(width, 0.1f);
-        height = Mathf.Max(height, 0.1f);
+        //width = Mathf.Max(width, 0.1f);
+        //height = Mathf.Max(height, 0.1f);
+        UpdateSprite();
         UpdateSize();
+    }
+
+    private void UpdateSprite()
+    {
+        if (sr == null) sr = GetComponent<SpriteRenderer>();
+        if (sr == null) return;
+        sr.sprite = type switch
+        {
+            PlatformType.Start => startSprite,
+            PlatformType.Crumble => crumbleSprite,
+            PlatformType.GoalCrypt => goalCryptSprite,
+            _ => standardSprite,
+        };
     }
 
     private void UpdateSize()
@@ -58,6 +78,7 @@ public class Platform : MonoBehaviour
             platformId = nextId++;
         sr = GetComponent<SpriteRenderer>();
         boxCol = GetComponent<BoxCollider2D>();
+        UpdateSprite();
         UpdateSize();
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null && crumbleSound != null)
