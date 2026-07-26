@@ -63,6 +63,8 @@ public class MainMenuManager : MonoBehaviour
         bgmOn = !bgmOn;
         PlayerPrefs.SetInt("BGMEnabled", bgmOn ? 1 : 0);
         UpdateSettingVisuals();
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.ApplySettings();
     }
 
     private void ToggleSFX()
@@ -70,6 +72,8 @@ public class MainMenuManager : MonoBehaviour
         sfxOn = !sfxOn;
         PlayerPrefs.SetInt("SFXEnabled", sfxOn ? 1 : 0);
         UpdateSettingVisuals();
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.ApplySettings();
     }
 
     private void UpdateSettingVisuals()
